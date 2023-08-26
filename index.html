@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #b5b3b3; /* Light gray background */
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #e4d0ab;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-top: 50px;
+           
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 70%;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        .student-details, .course-details {
+            width: 45%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .course-details {
+            background-color: #fff;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>STUDENT INFORMATION:</h1>
+        <form method="POST">
+            <label for="student_code">Enter Student Code: </label>
+            <input type="text" id="student_code" name="student_code" placeholder="Enter Student Code">
+            <button type="submit">SUBMIT</button>
+        </form>
+        {% if student_info %}
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div class="student-details">
+                    <h2>Student Details</h2>
+                    <p><strong>Name:</strong> {{ student_info['name'] }}</p>
+                    <p><strong>Student Code:</strong> {{ entered_student_code }}</p>
+                    <p><strong>Age:</strong> {{ student_info['age'] }}</p>
+                    <p><strong>Gender:</strong> {{ student_info['gender'] }}</p>
+                    <p><strong>City:</strong> {{ student_info['city'] }}</p>
+                </div>
+                <div class="course-details">
+                    <h2>Courses Taken</h2>
+                    <ul>
+                        {% for course in student_course_info %}
+                            <li>{{ course['course_name'] }} - ${{ course['course_price'] }}</li>
+                        {% endfor %}
+                    </ul>
+                    <p><strong>Total Courses Taken:</strong> {{ course_count }}</p>
+                    <p><strong>Total Cost:</strong> ${{ total_cost }}</p> <!-- Display total cost here -->
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
